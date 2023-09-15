@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .home{
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .main_circle{
+            width: 8rem;
+            height: 8rem;
+            z-index: 2;
+            background-color: purple;
+            border: 2px solid violet;
+            border-radius: 100%;
+            position: absolute;
+            top: 46%;
+            left: 46%;
+        }
+        .item_circle{
+            width: 5rem;
+            height: 5rem;
+            z-index: 1;
+            background-color: black;
+            border: 2px solid violet;
+            border-radius: 100%;
+            position: absolute;
+            top: 35.5%;
+            left: 47.5%;
+        }
+        .item_circle:nth-child(2){
+            transform: translate(128%,125%);
+        }
+        .item_circle:nth-child(3){
+            transform: translate(0%,255%);
+        }
+    </style>
+    <section class="home">
+        <div class="main_circle"></div>
+        <div class="item_circle"></div>
+        <div class="item_circle"></div>
+        <div class="item_circle"></div>
+    </section>
+</body>
+</html>
+
+
+
+

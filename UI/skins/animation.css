@@ -1,0 +1,132 @@
+@import url(./index.css);
+
+.backdisplay-anim{
+    animation: backdis;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    animation-duration:2s;
+    animation-iteration-count: infinite;
+}
+.swipein{
+    opacity: 0;
+    animation: swipein;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    animation-duration:.8s;
+    animation-iteration-count: 1;
+}
+.sink{
+    animation: sink;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    animation-duration:.8s;
+    animation-iteration-count: 1;
+}
+.fadeout{
+    animation: fadeout;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    animation-duration:.4s;
+    animation-iteration-count: 1;
+}
+
+.win_maximize{
+    animation:win-maximize;
+    animation-timing-function:cubic-bezier(0.79,-0.38, 0, 0.99);
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    border-radius: 0;
+}
+
+.win_loading_animation{
+    animation-name: load_window;
+    animation-timing-function:cubic-bezier(0.55,-0.02, 0, 0.99);
+    animation-duration:.3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+}
+/* Keyframes */
+@keyframes backdis {
+    0%{
+        opacity: 1;
+        box-shadow: 0 0 0px var(--highlighter);
+        transform: translateX(-10%);
+    }100%{
+        box-shadow: 0 0 800px var(--highlighter);
+        transform: translateY(15%);
+        transform: translate(10%);
+    }
+}
+
+@keyframes swipein {
+    0%{
+        opacity: 0;
+    }100%{
+        opacity: 1;
+        transform: translateY(-25%);
+    }
+}
+@keyframes sink {
+    0%{
+        opacity: 1;
+    }100%{
+        opacity: 0;
+        transform:scale(0);
+    }
+}
+@keyframes fadeout {
+    0%{
+        opacity: 1;
+    }100%{
+        opacity: 0;
+    }
+}
+@keyframes fade {
+    0%{
+        opacity: 1;
+    }
+    50%{opacity: 0.2;}
+    100%{
+        opacity: 1;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+    }
+}
+
+@keyframes load_window {
+    0%{
+        opacity: 0;
+        transform-origin: 0 50%;
+        transform: translate(-11px,-11px);
+        transform: scale(0);
+    }
+    50%{
+        transform: scaleY(1);
+        transform: scaleX(0);
+    }
+    100%{
+        transform: scaleX(1);
+    }
+}
+
+@keyframes win-maximize {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        width: 100vw;
+        height: 100vh;
+        opacity: 1;
+        left: 0;
+        top: 0;
+    }
+}
