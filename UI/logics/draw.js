@@ -20,9 +20,29 @@ export default class drawWindow {
         ]
 
         this.window_mode = 'locomotion';
+        
         document.querySelector('#desk_frame').appendChild(this.createBody(this.config));
         this.window_body.style.left = `${this.config.initialX}px`;
         this.window_body.style.top = `${this.config.initialY}px`;
+        this.window_state = {
+            'current_state':{
+                'width':null,
+                'height':null,
+                'canvas_height':null,
+                'canvas_width':null,
+                'canvas_document':null,
+                'head_width':null,
+                'head_height':null,
+                'window_title':this.config.title,
+                'window_icon':this.config.icon,
+                'window_position_x':this.window_body.offsetLeft,
+                'window_position_y':this.window_body.offsetTop,
+                'window_mode':null,
+                'window_arm':this.config,
+            },
+            'step_backward':null,
+            'step_forward':null
+        }
         const i = 50;
         setTimeout(() => {
             this.window_body.style.display = 'block';
@@ -145,7 +165,6 @@ export default class drawWindow {
             controller.addEventListener('mousemove', (e) => {
                 this.move_maker(e, window);
 
-
             })
             controller.addEventListener('mouseleave', (e) => {
                 this.move_intermediate(e);
@@ -173,7 +192,12 @@ export default class drawWindow {
     }
     trafic_events(close, minimize, maximize, windowID) {
         close.onclick = () => {
-            document.getElementById(windowID).remove();
+            const window = document.getElementById(windowID);
+            window.classList.add('sink');
+            window.style.animationDuration = '.3s'
+            setTimeout(() => {
+                document.getElementById(windowID).remove();
+            }, 400);
         }
         minimize.onclick = () => {
             if(this.window_body.getAttribute('data-ismin') == 'false'){
@@ -182,23 +206,40 @@ export default class drawWindow {
                 this.traffic_dom.style.width = '25%';
                 this.icon.style.display = 'none';
                 console.log('minimized');
-                this.window_body.setAttribute('data-ismin')
+                this.window_body.setAttribute('data-ismin','true');
+                this.updateState();
             }            
+            else{
+                this.window_canvas.style.height = '100%';
+                this.window_body.style.width= this.config.width;
+                this.traffic_dom.style.width = '12%';
+                this.icon.style.display = 'flex';
+                console.log('normal');
+                this.window_body.setAttribute('data-ismin','false');
+                this.updateState();
+            }
         }
         maximize.onclick = () => {
             const window = document.getElementById(windowID);
             if (window.getAttribute('data-state') == 'max') {
                 this.window_mode = 'static';
                 window.setAttribute('data-state', 'min');
+                this.window_canvas.style.height = '100%';
+                console.log(this.window_state.current_state.canvas_width);
+                this.traffic_dom.style.width = '12%';
                 this.windowState.isMaximized = true;
                 this.windowEvents(false, this.window_body, this.window_head);
+                this.window_head.style.height = '5%';
                 window.classList.add('win_maximize');
+                this.updateState();
             }
             else {
                 this.window_mode = 'max';
                 window.setAttribute('data-state', 'max');
+                this.window_head.style.height = '7%';
                 window.classList.remove('win_maximize');
                 this.windowState.isMaximized = false;
+                this.updateState();
             }
 
         }
@@ -208,6 +249,7 @@ export default class drawWindow {
         this.windowState.move = true;
         this.windowState.initial_X = e.clientX;
         this.windowState.initial_Y = e.clientY;
+        this.updateState();
     }
 
     move_maker(e, window) {
@@ -221,6 +263,9 @@ export default class drawWindow {
             this.canDOm.style.opacity = '0.5';
             this.windowState.initial_X = e.clientX;
             this.windowState.initial_Y = e.clientY;
+            // this.window_state.current_state.window_position_x = window.style.left;
+            // this.window_state.current_state.window_position_y = window.style.top;
+            this.updateState();
         }
     }
 
@@ -228,14 +273,35 @@ export default class drawWindow {
         this.windowState.move = false;
         this.windowState.initial_X, this.windowState.initial_Y, this.windowState.final_X, this.windowState.final_Y = 0;
         this.canDOm.style.opacity = '1';
+        this.updateState();
     }
 
     move_stopper(e) {
         this.windowState.move = false;
         this.windowState.initial_X, this.windowState.initial_Y, this.windowState.final_X, this.windowState.final_Y = 0;
         this.canDOm.style.opacity = '1';
+        this.updateState();
     }
 
+    updateState(){
+        this.window_state.step_backward = this.window_state.current_state;
+        
+        this.window_state.current_state.canvas_document  = null;
+        this.window_state.current_state.canvas_width = this.window_canvas.style.width;
+        this.window_state.current_state.canvas_height = this.window_canvas.style.height;
+        this.window_state.current_state.head_height = this.head.style.height;
+        this.window_state.current_state.head_width = this.head.style.width;
+        this.window_state.current_state.height = this.window_body.style.height;
+        this.window_state.current_state.width = this.window_body.style.width;
+        this.window_state.current_state.window_arm = this.config;
+        this.window_state.current_state.window_icon = this.icon_image;
+        this.window_state.current_state.window_mode = this.window_body.getAttribute('data-mode');
+        this.window_state.current_state.window_position_x = this.window_body.style.left;
+        this.window_state.current_state.window_position_y = this.window_body.style.top;
+        this.window_state.current_state.window_title = this.title;
+        
+        console.log(this.window_state.current_state);
+    }
 
 }
 
