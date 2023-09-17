@@ -38,10 +38,18 @@ app.get('/loadDocument',(req,res)=>{
     res.json({'getting':'data'});
 })
 
-app.get('/thread1');
-app.get('/thread2');
-app.get('/thread3');
-app.get('/thread4');
+app.get('/thread1',(req,res)=>{
+    const runtime = new process(req.params.payload1,req.params.payload2,req.params.commands,req.params.addons);
+});
+app.get('/thread2',(req,res)=>{
+    const runtime = new process(req.params.payload1,req.params.payload2,req.params.commands,req.params.addons);
+});
+app.get('/thread3',(req,res)=>{
+    const runtime = new process(req.params.payload1,req.params.payload2,req.params.commands,req.params.addons);
+});
+app.get('/thread4',(req,res)=>{
+    const runtime = new process(req.params.payload1,req.params.payload2,req.params.commands,req.params.addons);
+});
 
 
 app.listen(app_port,()=>{
