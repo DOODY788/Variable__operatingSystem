@@ -76,7 +76,7 @@ class loadDekstop {
         console.log(root.getAttribute("data-appname"))
         const window_frame = new Window({
             'frameStyle': 'shyama',
-            'height': '35rem',
+            'height': 'fit-content',
             'width': '50rem',
             'icon': 'none',
             'isToolwindow': false,
@@ -84,7 +84,8 @@ class loadDekstop {
             "title":root.getAttribute("data-appname"),
             'type': 'window',
             'initialX':initialX,
-            'initialY':initialY
+            'initialY':initialY,
+            'internalFile':`../armature/${root.getAttribute("data-appname")}.html`
         });
     }
 

@@ -72,6 +72,10 @@
     overflow: hidden;
     z-index: 3;
     display: none;
+    flex-direction: column;
+    flex-grow: 1;
+    /* align-items: center; */
+    /* justify-content: center; */
     resize: both;
 }
 
@@ -92,12 +96,15 @@
 
 .canDom{
     width: 100%;
-    height: 100%;
+    height: 10%;
     background-color: rgb(117, 117, 117);
     margin: 0.5rem 0;
     /* border: 2px solid rgb(145, 145, 145); */
     border-radius: 0.8rem;
     transition: .3s;
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 .icon{
@@ -142,4 +149,8 @@
     height: 1rem;
     border: 1px solid var(--inpbordercolor);
     border-radius: 100%;
+}
+.innerCode{
+    width: 100%;
+    height: 100%;
 }

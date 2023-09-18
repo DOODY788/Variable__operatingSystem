@@ -31,6 +31,7 @@ class process {
 
         childProcess.stdout.on('data',(data)=>{
             // console.log(data.toString());
+            this.insertToRam(data);
             return data.toString();
         })
 
@@ -42,7 +43,8 @@ class process {
     }
 
     insertToRam(data) {
-        const file = fs.readFileSync('')
+        const file = fs.readFileSync((path.join(__dirname, './../Ram/stack1/json')));
+        console.log(file);
     }
 }
 

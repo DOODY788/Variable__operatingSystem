@@ -45,14 +45,14 @@ export default class drawWindow {
         }
         const i = 50;
         setTimeout(() => {
-            this.window_body.style.display = 'block';
+            this.window_body.style.display = 'flex';
             this.window_body.classList.add('win_loading_animation');
             this.window_body.style.width = (this.config.width);
             this.window_body.style.height = this.config.height;
         }, 100);
         setTimeout(() => {
             this.window_body.classList.remove('win_loading_animation');
-        }, 350);
+        }, 350); 
     }
     generateId(prefix) {
         return `${prefix + Math.floor(Math.random() * 1000)}`;
@@ -118,8 +118,10 @@ export default class drawWindow {
         this.canDOm = document.createElement('div');
         this.canDOm.setAttribute('class','canDom');
         this.canDOm.id = this.generateId('canvas');
-        this.canDOm.innerHTML = 'Your application will be here';
-
+        this.innerCode = document.createElement('iframe');
+        this.innerCode.src= this.config.internalFile;
+        this.innerCode.setAttribute('class','innerCode');
+        this.canDOm.appendChild(this.innerCode);
         return this.canDOm;
     }
 

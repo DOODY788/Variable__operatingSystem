@@ -1,0 +1,26 @@
+@import url(../skins/index.css);
+
+.mainframe{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(21, 21, 21);
+    font-family: 'sp regular';
+    color: white;
+    overflow-y: scroll;
+    scroll-behavior:smooth;
+}
+.session-dom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.inp{
+    background-color: transparent;
+    color: white;
+    font-family: 'sp medium';
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 0.2rem;
+}
